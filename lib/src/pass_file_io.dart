@@ -107,9 +107,12 @@ class PassFileIO {
     final passId = _generatePassId();
     final passFile = await _createPass(passId: passId);
     final passDir = Directory(path.withoutExtension(passFile.path));
-    final dio = Dio();
-    dio.options.headers['Authorization'] = authToken;
-    final response = await dio.download(url, passFile.path);
+    final response = await Dio().download(
+      url,
+      passFile.path,
+      options: Options(
+          headers: <String, String>{'Authorization': 'Bearer $authToken'}),
+    );
 
     if (response.statusCode == 200) {
       await _unpackPass(passPath: passFile.path);

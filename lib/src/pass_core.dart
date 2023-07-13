@@ -25,8 +25,9 @@ class Pass {
   }
 
   /// Save pass file from [url] to internal memory, parse and return [PassFile]
-  Future<PassFile> saveFromUrl({required String url}) async {
-    return PassFileIO().saveFromUrl(url: url);
+  Future<PassFile> saveFromUrl(
+      {required String url, required String authToken}) async {
+    return PassFileIO().saveFromUrl(url: url, authToken: authToken);
   }
 
   /// Fetch preview of pass file from [url], parse and return [PassFile]
